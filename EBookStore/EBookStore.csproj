@@ -78,8 +78,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="BackAdmin\AdminOnlyMaster.aspx" />
     <Content Include="BackAdmin\BookDetail.aspx" />
     <Content Include="BackAdmin\BookList.aspx" />
+    <Content Include="BackAdmin\EditWithMain.aspx" />
     <Content Include="BackAdmin\Index.aspx" />
     <Content Include="BookDetail.aspx" />
     <Content Include="BookList.aspx" />
@@ -142,6 +144,13 @@
     <Compile Include="BackAdmin\Admin.Master.designer.cs">
       <DependentUpon>Admin.Master</DependentUpon>
     </Compile>
+    <Compile Include="BackAdmin\AdminOnlyMaster.aspx.cs">
+      <DependentUpon>AdminOnlyMaster.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BackAdmin\AdminOnlyMaster.aspx.designer.cs">
+      <DependentUpon>AdminOnlyMaster.aspx</DependentUpon>
+    </Compile>
     <Compile Include="BackAdmin\BookDetail.aspx.cs">
       <DependentUpon>BookDetail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -155,6 +164,13 @@
     </Compile>
     <Compile Include="BackAdmin\BookList.aspx.designer.cs">
       <DependentUpon>BookList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BackAdmin\EditWithMain.aspx.cs">
+      <DependentUpon>EditWithMain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BackAdmin\EditWithMain.aspx.designer.cs">
+      <DependentUpon>EditWithMain.aspx</DependentUpon>
     </Compile>
     <Compile Include="BackAdmin\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
@@ -217,10 +233,14 @@
     <Compile Include="Main.Master.designer.cs">
       <DependentUpon>Main.Master</DependentUpon>
     </Compile>
+    <Compile Include="Managers\AccountManager.cs" />
+    <Compile Include="Managers\BookContentManager.cs" />
     <Compile Include="Managers\OrderManager.cs" />
     <Compile Include="Managers\PaymentManager.cs" />
     <Compile Include="Managers\UserManager.cs" />
     <Compile Include="Managers\BookManager.cs" />
+    <Compile Include="Models\BookContentModel.cs" />
+    <Compile Include="Models\MemberAccount.cs" />
     <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\BookModel.cs" />

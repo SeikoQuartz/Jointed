@@ -7,12 +7,21 @@
 // </自動產生的>
 //------------------------------------------------------------------------------
 
-namespace EBookStore.BackAdmin
+namespace Project.BackAdmin
 {
 
 
-    public partial class BookList
+    public partial class AdminOnlyMaster
     {
+
+        /// <summary>
+        /// ltlAccount 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltlAccount;
 
         /// <summary>
         /// btnCreate 控制項。
@@ -33,6 +42,24 @@ namespace EBookStore.BackAdmin
         protected global::System.Web.UI.WebControls.Button btnDelete;
 
         /// <summary>
+        /// btnCancel 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancel;
+
+        /// <summary>
+        /// BtnLogout 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnLogout;
+
+        /// <summary>
         /// txtKeyword 控制項。
         /// </summary>
         /// <remarks>
@@ -49,51 +76,6 @@ namespace EBookStore.BackAdmin
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSearch;
-
-        /// <summary>
-        /// ltlDisplay 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltlDisplay;
-
-        /// <summary>
-        /// btnIsEnableTrue 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnIsEnableTrue;
-
-        /// <summary>
-        /// btnIsEnableFalse 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnIsEnableFalse;
-
-        /// <summary>
-        /// btnSearchIETrue 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSearchIETrue;
-
-        /// <summary>
-        /// btnSearchIEFalse 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSearchIEFalse;
 
         /// <summary>
         /// gvList 控制項。

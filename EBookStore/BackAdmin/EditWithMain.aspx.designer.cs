@@ -7,110 +7,110 @@
 // </自動產生的>
 //------------------------------------------------------------------------------
 
-namespace EBookStore.BackAdmin
+namespace Project.BackAdmin
 {
 
 
-    public partial class BookList
+    public partial class EditWithMain
     {
 
         /// <summary>
-        /// btnCreate 控制項。
+        /// ltlID 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCreate;
+        protected global::System.Web.UI.WebControls.Literal ltlID;
 
         /// <summary>
-        /// btnDelete 控制項。
+        /// ltlAccount 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDelete;
+        protected global::System.Web.UI.WebControls.Literal ltlAccount;
 
         /// <summary>
-        /// txtKeyword 控制項。
+        /// txtAccount 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtKeyword;
+        protected global::System.Web.UI.WebControls.TextBox txtAccount;
 
         /// <summary>
-        /// btnSearch 控制項。
+        /// txtPassword 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSearch;
+        protected global::System.Web.UI.WebControls.TextBox txtPassword;
 
         /// <summary>
-        /// ltlDisplay 控制項。
+        /// txtPhone 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltlDisplay;
+        protected global::System.Web.UI.WebControls.TextBox txtPhone;
 
         /// <summary>
-        /// btnIsEnableTrue 控制項。
+        /// txtEmail 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnIsEnableTrue;
+        protected global::System.Web.UI.WebControls.TextBox txtEmail;
 
         /// <summary>
-        /// btnIsEnableFalse 控制項。
+        /// txtLevel 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnIsEnableFalse;
+        protected global::System.Web.UI.WebControls.TextBox txtLevel;
 
         /// <summary>
-        /// btnSearchIETrue 控制項。
+        /// lblMsg 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSearchIETrue;
+        protected global::System.Web.UI.WebControls.Label lblMsg;
 
         /// <summary>
-        /// btnSearchIEFalse 控制項。
+        /// btnSave 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSearchIEFalse;
+        protected global::System.Web.UI.WebControls.Button btnSave;
 
         /// <summary>
-        /// gvList 控制項。
+        /// btnCancel 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvList;
+        protected global::System.Web.UI.WebControls.Button btnCancel;
 
         /// <summary>
-        /// plcEmpty 控制項。
+        /// btnBack 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder plcEmpty;
+        protected global::System.Web.UI.WebControls.Button btnBack;
     }
 }
