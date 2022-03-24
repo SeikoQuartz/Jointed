@@ -11,22 +11,25 @@ namespace EBookStore.BackAdmin
 {
     public partial class BookList : System.Web.UI.Page
     {
-       private BookContentManager _mgr = new BookContentManager();
-        private AccountManager _mgruser = new AccountManager();
+        private BookContentManager _mgr = new BookContentManager();
+        private const int _pageSize = 10;
 
         // 從資料庫叫出全部的清單資料 OR 輸入書名搜尋關鍵字查詢
         // 將 搜尋關鍵字值 變成 QueryString，再次載入 BookList 頁面，顯示查詢結果
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!this._mgruser.IsLogined())
-            {
-                Response.Redirect("~/Login.aspx");
-            }
+            string pageIndexText = this.Request.QueryString["Index"];
+            int pageIndex =
+                (string.IsNullOrWhiteSpace(pageIndexText))
+                    ? 1
+                    : Convert.ToInt32(pageIndexText);
+
             if (!this.IsPostBack)
             {
                 // 取得keyword的querystring，以及還原至textbox
                 string keyword = this.Request.QueryString["keyword"];
-                this.txtKeyword.Text = keyword;
+                if (!string.IsNullOrWhiteSpace(keyword))
+                    this.txtKeyword.Text = keyword;
 
                 // 用 keyword 來判斷，是要 從資料庫叫出全部的清單資料 OR 查詢輸入關鍵字的資料，
                 // 並切換 顯示分類資料的按鈕 區塊
@@ -45,7 +48,13 @@ namespace EBookStore.BackAdmin
                     this.btnSearchIEFalse.Visible = true;
                 }
 
-                List<BookContentModel> list = this._mgr.GetAdminBookList(keyword); // 從資料庫叫出全部的清單資料 OR 查詢輸入關鍵字的資料
+                int totalRows = 0;
+                List<BookContentModel> list = this._mgr.GetBookList(keyword, _pageSize, pageIndex, out totalRows);
+                //List<BookContentModel> list = this._mgr.GetAdminBookList(keyword); // 從資料庫叫出全部的清單資料 OR 查詢輸入關鍵字的資料
+
+                this.ucPager.TotalRows = totalRows;
+                this.ucPager.PageIndex = pageIndex;
+                this.ucPager.Bind("keyword", keyword);
 
                 if (list.Count > 0) // 有資料
                 {
@@ -130,100 +139,154 @@ namespace EBookStore.BackAdmin
                 Response.Redirect("BookList.aspx?keyword=" + keyword);
         }
 
+        //// 從資料庫叫出IsEnable True 的全部清單資料，顯示於畫面上
+        //protected void btnIsEnableTrue_Click(object sender, EventArgs e)
+        //{
+        //    //string pageIndexText = this.Request.QueryString["Index"];
+        //    //int pageIndex =
+        //    //    (string.IsNullOrWhiteSpace(pageIndexText))
+        //    //        ? 1
+        //    //        : Convert.ToInt32(pageIndexText);
+
+        //    // 取得keyword的querystring，以及還原至textbox
+        //    string keyword = this.Request.QueryString["keyword"];
+        //    if (!string.IsNullOrWhiteSpace(keyword))
+        //        this.txtKeyword.Text = keyword;
+
+        //    //int totalRows = 0;
+        //    //List<BookContentModel> listIETrue = this._mgr.GetBookListIsEnableTrue(keyword, _pageSize, pageIndex, out totalRows);
+        //    List<BookContentModel> listIETrue = this._mgr.GetAdminBookListIsEnableTrue(keyword); // 從資料庫叫出IsEnableTrue的全部清單資料
+
+        //    //this.ucPager.TotalRows = totalRows;
+        //    //this.ucPager.PageIndex = pageIndex;
+        //    //this.ucPager.Bind("keyword", keyword);
+
+        //    if (listIETrue.Count > 0) // 有資料
+        //    {
+        //        this.gvList.DataSource = listIETrue;  // GridView 做 資料繫結
+        //        this.gvList.DataBind();         // 顯示於頁面上
+
+        //        this.plcEmpty.Visible = false;  // 隱藏 未有資料 的區塊
+        //        this.gvList.Visible = true;
+        //    }
+        //    else    // 沒有資料
+        //    {
+        //        this.plcEmpty.Visible = true;   // 顯示 未有資料 的區塊
+        //        this.gvList.Visible = false;
+        //    }
+        //}
+
         // 從資料庫叫出IsEnable True 的全部清單資料，顯示於畫面上
         protected void btnIsEnableTrue_Click(object sender, EventArgs e)
         {
-            // 取得keyword的querystring，以及還原至textbox
             string keyword = this.Request.QueryString["keyword"];
-            this.txtKeyword.Text = keyword;
-
-            List<BookContentModel> listIETrue = this._mgr.GetAdminBookListIsEnableTrue(keyword); // 從資料庫叫出IsEnableTrue的全部清單資料
-
-            if (listIETrue.Count > 0) // 有資料
-            {
-                this.gvList.DataSource = listIETrue;  // GridView 做 資料繫結
-                this.gvList.DataBind();         // 顯示於頁面上
-
-                this.plcEmpty.Visible = false;  // 隱藏 未有資料 的區塊
-                this.gvList.Visible = true;
-            }
-            else    // 沒有資料
-            {
-                this.plcEmpty.Visible = true;   // 顯示 未有資料 的區塊
-                this.gvList.Visible = false;
-            }
+            Response.Redirect("BookListIsEnableTrue.aspx?keyword=" + keyword);
         }
+
+        //// 從資料庫叫出IsEnable False 的全部清單資料，顯示於畫面上
+        //protected void btnIsEnableFalse_Click(object sender, EventArgs e)
+        //{
+        //    //string pageIndexText = this.Request.QueryString["Index"];
+        //    //int pageIndex =
+        //    //    (string.IsNullOrWhiteSpace(pageIndexText))
+        //    //        ? 1
+        //    //        : Convert.ToInt32(pageIndexText);
+
+        //    // 取得keyword的querystring，以及還原至textbox
+        //    string keyword = this.Request.QueryString["keyword"];
+        //    if (!string.IsNullOrWhiteSpace(keyword))
+        //        this.txtKeyword.Text = keyword;
+
+        //    //int totalRows = 0;
+        //    //List<BookContentModel> listIEFalse = this._mgr.GetBookListIsEnableFalse(keyword, _pageSize, pageIndex, out totalRows);
+        //    List<BookContentModel> listIEFalse = this._mgr.GetAdminBookListIsEnableFalse(keyword);  // 從資料庫叫出IsEnableFalse的全部清單資料
+
+        //    //this.ucPager.TotalRows = totalRows;
+        //    //this.ucPager.PageIndex = pageIndex;
+        //    //this.ucPager.Bind("keyword", keyword);
+
+        //    if (listIEFalse.Count > 0) // 有資料
+        //    {
+        //        this.gvList.DataSource = listIEFalse;  // GridView 做 資料繫結
+        //        this.gvList.DataBind();         // 顯示於頁面上
+
+        //        this.plcEmpty.Visible = false;  // 隱藏 未有資料 的區塊
+        //        this.gvList.Visible = true;
+        //    }
+        //    else    // 沒有資料
+        //    {
+        //        this.plcEmpty.Visible = true;   // 顯示 未有資料 的區塊
+        //        this.gvList.Visible = false;
+        //    }
+        //}
 
         // 從資料庫叫出IsEnable False 的全部清單資料，顯示於畫面上
         protected void btnIsEnableFalse_Click(object sender, EventArgs e)
         {
-            // 取得keyword的querystring，以及還原至textbox
             string keyword = this.Request.QueryString["keyword"];
-            this.txtKeyword.Text = keyword;
-
-            List<BookContentModel> listIEFalse = this._mgr.GetAdminBookListIsEnableFalse(keyword);  // 從資料庫叫出IsEnableFalse的全部清單資料
-
-            if (listIEFalse.Count > 0) // 有資料
-            {
-                this.gvList.DataSource = listIEFalse;  // GridView 做 資料繫結
-                this.gvList.DataBind();         // 顯示於頁面上
-
-                this.plcEmpty.Visible = false;  // 隱藏 未有資料 的區塊
-                this.gvList.Visible = true;
-            }
-            else    // 沒有資料
-            {
-                this.plcEmpty.Visible = true;   // 顯示 未有資料 的區塊
-                this.gvList.Visible = false;
-            }
+            Response.Redirect("BookListIsEnableFalse.aspx?keyword=" + keyword);
         }
+
+        //// 查詢輸入關鍵字的IsEnable True 的資料，顯示於畫面上
+        //protected void btnSearchIETrue_Click(object sender, EventArgs e)
+        //{
+        //    // 取得keyword的querystring，以及還原至textbox
+        //    string keyword = this.Request.QueryString["keyword"];
+        //    this.txtKeyword.Text = keyword;
+
+        //    List<BookContentModel> listIETrue = this._mgr.GetAdminBookListIsEnableTrue(keyword); // 查詢輸入關鍵字的IsEnable True 的資料
+
+        //    if (listIETrue.Count > 0) // 有資料
+        //    {
+        //        this.gvList.DataSource = listIETrue;  // GridView 做 資料繫結
+        //        this.gvList.DataBind();         // 顯示於頁面上
+
+        //        this.plcEmpty.Visible = false;  // 隱藏 未有資料 的區塊
+        //        this.gvList.Visible = true;
+        //    }
+        //    else    // 沒有資料
+        //    {
+        //        this.plcEmpty.Visible = true;   // 顯示 未有資料 的區塊
+        //        this.gvList.Visible = false;
+        //    }
+        //}
 
         // 查詢輸入關鍵字的IsEnable True 的資料，顯示於畫面上
         protected void btnSearchIETrue_Click(object sender, EventArgs e)
         {
-            // 取得keyword的querystring，以及還原至textbox
             string keyword = this.Request.QueryString["keyword"];
-            this.txtKeyword.Text = keyword;
-
-            List<BookContentModel> listIETrue = this._mgr.GetAdminBookListIsEnableTrue(keyword); // 查詢輸入關鍵字的IsEnable True 的資料
-
-            if (listIETrue.Count > 0) // 有資料
-            {
-                this.gvList.DataSource = listIETrue;  // GridView 做 資料繫結
-                this.gvList.DataBind();         // 顯示於頁面上
-
-                this.plcEmpty.Visible = false;  // 隱藏 未有資料 的區塊
-                this.gvList.Visible = true;
-            }
-            else    // 沒有資料
-            {
-                this.plcEmpty.Visible = true;   // 顯示 未有資料 的區塊
-                this.gvList.Visible = false;
-            }
+            Response.Redirect("BookListSearchIETrue.aspx?keyword=" + keyword);
         }
+
+        //// 查詢輸入關鍵字的IsEnable False 的資料，顯示於畫面上
+        //protected void btnSearchIEFalse_Click(object sender, EventArgs e)
+        //{
+        //    // 取得keyword的querystring，以及還原至textbox
+        //    string keyword = this.Request.QueryString["keyword"];
+        //    this.txtKeyword.Text = keyword;
+
+        //    List<BookContentModel> listIEFalse = this._mgr.GetAdminBookListIsEnableFalse(keyword); // 查詢輸入關鍵字的IsEnable False 的資料
+
+        //    if (listIEFalse.Count > 0) // 有資料
+        //    {
+        //        this.gvList.DataSource = listIEFalse;  // GridView 做 資料繫結
+        //        this.gvList.DataBind();         // 顯示於頁面上
+
+        //        this.plcEmpty.Visible = false;  // 隱藏 未有資料 的區塊
+        //        this.gvList.Visible = true;
+        //    }
+        //    else    // 沒有資料
+        //    {
+        //        this.plcEmpty.Visible = true;   // 顯示 未有資料 的區塊
+        //        this.gvList.Visible = false;
+        //    }
+        //}
 
         // 查詢輸入關鍵字的IsEnable False 的資料，顯示於畫面上
         protected void btnSearchIEFalse_Click(object sender, EventArgs e)
         {
-            // 取得keyword的querystring，以及還原至textbox
             string keyword = this.Request.QueryString["keyword"];
-            this.txtKeyword.Text = keyword;
-
-            List<BookContentModel> listIEFalse = this._mgr.GetAdminBookListIsEnableFalse(keyword); // 查詢輸入關鍵字的IsEnable False 的資料
-
-            if (listIEFalse.Count > 0) // 有資料
-            {
-                this.gvList.DataSource = listIEFalse;  // GridView 做 資料繫結
-                this.gvList.DataBind();         // 顯示於頁面上
-
-                this.plcEmpty.Visible = false;  // 隱藏 未有資料 的區塊
-                this.gvList.Visible = true;
-            }
-            else    // 沒有資料
-            {
-                this.plcEmpty.Visible = true;   // 顯示 未有資料 的區塊
-                this.gvList.Visible = false;
-            }
+            Response.Redirect("BookListSearchIEFalse.aspx?keyword=" + keyword);
         }
     }
 }

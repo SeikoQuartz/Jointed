@@ -7,119 +7,92 @@
 // </自動產生的>
 //------------------------------------------------------------------------------
 
-namespace EBookStore.BackAdmin
+namespace EBookStore.ShareControls
 {
 
 
-    public partial class BookList
+    public partial class ucPager
     {
 
         /// <summary>
-        /// btnCreate 控制項。
+        /// aLinkFirst 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCreate;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor aLinkFirst;
 
         /// <summary>
-        /// btnDelete 控制項。
+        /// aLinkPrev 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDelete;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor aLinkPrev;
 
         /// <summary>
-        /// txtKeyword 控制項。
+        /// aLinkPage1 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtKeyword;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor aLinkPage1;
 
         /// <summary>
-        /// btnSearch 控制項。
+        /// aLinkPage2 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSearch;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor aLinkPage2;
 
         /// <summary>
-        /// ltlDisplay 控制項。
+        /// aLinkPage3 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltlDisplay;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor aLinkPage3;
 
         /// <summary>
-        /// btnIsEnableTrue 控制項。
+        /// aLinkPage4 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnIsEnableTrue;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor aLinkPage4;
 
         /// <summary>
-        /// btnIsEnableFalse 控制項。
+        /// aLinkPage5 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnIsEnableFalse;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor aLinkPage5;
 
         /// <summary>
-        /// btnSearchIETrue 控制項。
+        /// aLinkNext 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSearchIETrue;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor aLinkNext;
 
         /// <summary>
-        /// btnSearchIEFalse 控制項。
+        /// aLinkLast 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSearchIEFalse;
-
-        /// <summary>
-        /// gvList 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvList;
-
-        /// <summary>
-        /// plcEmpty 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder plcEmpty;
-
-        /// <summary>
-        /// ucPager 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::EBookStore.ShareControls.ucPager ucPager;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor aLinkLast;
     }
 }

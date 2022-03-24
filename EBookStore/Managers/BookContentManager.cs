@@ -10,6 +10,235 @@ namespace EBookStore.Managers
 {
     public class BookContentManager
     {
+        // *分頁 從資料庫叫出全部的清單資料 OR 輸入書名搜尋關鍵字查詢
+        public List<BookContentModel> GetBookList(string keyword, int pageSize, int pageIndex, out int totalRows)
+        {
+            int skip = pageSize * (pageIndex - 1);  // 計算跳頁數
+            if (skip < 0)
+                skip = 0;
+
+
+            string whereCondition = string.Empty;
+            string whereAndCondition = string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(keyword))
+            {
+                whereCondition = " WHERE BookName LIKE '%'+@keyword+'%' ";
+                whereAndCondition = " AND BookName LIKE '%'+@keyword+'%' ";
+            }
+
+            string connStr = ConfigHelper.GetConnectionString();
+            string commandText =
+                $@" SELECT TOP {pageSize} *
+                    FROM Books 
+                    WHERE 
+                        BookID NOT IN 
+                        (
+                            SELECT TOP {skip} BookID
+                            FROM Books
+                            {whereCondition}
+                            ORDER BY Date DESC
+                        ) 
+                        {whereAndCondition}
+                    ORDER BY Date DESC ";
+            string commandCountText =
+                $@" SELECT COUNT(BookID) 
+                    FROM Books
+                    {whereCondition}
+                    ";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    using (SqlCommand command = new SqlCommand(commandText, conn))
+                    {
+                        if (!string.IsNullOrWhiteSpace(keyword))
+                            command.Parameters.AddWithValue("@keyword", keyword);   // 參數化查詢
+
+                        conn.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        List<BookContentModel> retList = new List<BookContentModel>();    // 將資料庫內容轉為自定義型別清單
+                        while (reader.Read())
+                        {
+                            BookContentModel info = this.BuildBookContentModel(reader);
+                            retList.Add(info);
+                        }
+                        reader.Close();
+
+                        // 取得總筆數
+                        command.CommandText = commandCountText;
+                        if (!string.IsNullOrWhiteSpace(keyword))
+                        {
+                            command.Parameters.Clear();                             // 不同的查詢，必須使用不同的參數集合
+                            command.Parameters.AddWithValue("@keyword", keyword);
+                        }
+                        totalRows = (int)command.ExecuteScalar();
+
+                        return retList;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog("BookContentManager.GetBookList", ex);
+                throw;
+            }
+        }
+
+        // *分頁 從資料庫叫出全部(IsEnableTrue)的清單資料 OR 輸入書名搜尋關鍵字查詢(IsEnableTrue)
+        public List<BookContentModel> GetBookListIsEnableTrue(string keyword, int pageSize, int pageIndex, out int totalRows)
+        {
+            int skip = pageSize * (pageIndex - 1);  // 計算跳頁數
+            if (skip < 0)
+                skip = 0;
+
+
+            string whereCondition = string.Empty;
+            if (!string.IsNullOrWhiteSpace(keyword))
+                whereCondition = " AND BookName LIKE '%'+@keyword+'%' ";
+
+            string connStr = ConfigHelper.GetConnectionString();
+            string commandText =
+                $@" SELECT TOP {pageSize} *
+                    FROM Books 
+                    WHERE 
+                        IsEnable = 'true' AND
+                        BookID NOT IN 
+                        (
+                            SELECT TOP {skip} BookID
+                            FROM Books
+                            WHERE 
+                                IsEnable = 'true'
+                                {whereCondition}
+                            ORDER BY Date DESC
+                        ) 
+                        {whereCondition}
+                    ORDER BY Date DESC ";
+            string commandCountText =
+                $@" SELECT COUNT(BookID) 
+                    FROM Books
+                    WHERE IsEnable = 'true'
+                    {whereCondition}
+                    ";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    using (SqlCommand command = new SqlCommand(commandText, conn))
+                    {
+                        if (!string.IsNullOrWhiteSpace(keyword))
+                            command.Parameters.AddWithValue("@keyword", keyword);   // 參數化查詢
+
+                        conn.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        List<BookContentModel> retList = new List<BookContentModel>();    // 將資料庫內容轉為自定義型別清單
+                        while (reader.Read())
+                        {
+                            BookContentModel info = this.BuildBookContentModel(reader);
+                            retList.Add(info);
+                        }
+                        reader.Close();
+
+                        // 取得總筆數
+                        command.CommandText = commandCountText;
+                        if (!string.IsNullOrWhiteSpace(keyword))
+                        {
+                            command.Parameters.Clear();                             // 不同的查詢，必須使用不同的參數集合
+                            command.Parameters.AddWithValue("@keyword", keyword);
+                        }
+                        totalRows = (int)command.ExecuteScalar();
+
+                        return retList;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog("BookContentManager.GetBookListIsEnableTrue", ex);
+                throw;
+            }
+        }
+
+        // *分頁 從資料庫叫出全部(IsEnableFalse)的清單資料 OR 輸入書名搜尋關鍵字查詢(IsEnableFalse)
+        public List<BookContentModel> GetBookListIsEnableFalse(string keyword, int pageSize, int pageIndex, out int totalRows)
+        {
+            int skip = pageSize * (pageIndex - 1);  // 計算跳頁數
+            if (skip < 0)
+                skip = 0;
+
+
+            string whereCondition = string.Empty;
+            if (!string.IsNullOrWhiteSpace(keyword))
+                whereCondition = " AND BookName LIKE '%'+@keyword+'%' ";
+
+            string connStr = ConfigHelper.GetConnectionString();
+            string commandText =
+                $@" SELECT TOP {pageSize} *
+                    FROM Books 
+                    WHERE 
+                        IsEnable = 'false' AND
+                        BookID NOT IN 
+                        (
+                            SELECT TOP {skip} BookID
+                            FROM Books
+                            WHERE 
+                                IsEnable = 'false'
+                                {whereCondition}
+                            ORDER BY Date DESC
+                        ) 
+                        {whereCondition}
+                    ORDER BY Date DESC ";
+            string commandCountText =
+                $@" SELECT COUNT(BookID) 
+                    FROM Books
+                    WHERE IsEnable = 'false'
+                    {whereCondition}
+                    ";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    using (SqlCommand command = new SqlCommand(commandText, conn))
+                    {
+                        if (!string.IsNullOrWhiteSpace(keyword))
+                            command.Parameters.AddWithValue("@keyword", keyword);   // 參數化查詢
+
+                        conn.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        List<BookContentModel> retList = new List<BookContentModel>();    // 將資料庫內容轉為自定義型別清單
+                        while (reader.Read())
+                        {
+                            BookContentModel info = this.BuildBookContentModel(reader);
+                            retList.Add(info);
+                        }
+                        reader.Close();
+
+                        // 取得總筆數
+                        command.CommandText = commandCountText;
+                        if (!string.IsNullOrWhiteSpace(keyword))
+                        {
+                            command.Parameters.Clear();                             // 不同的查詢，必須使用不同的參數集合
+                            command.Parameters.AddWithValue("@keyword", keyword);
+                        }
+                        totalRows = (int)command.ExecuteScalar();
+
+                        return retList;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog("BookContentManager.GetBookListIsEnableFalse", ex);
+                throw;
+            }
+        }
+
+
+
+        // 從資料庫叫出全部的清單資料 OR 輸入書名搜尋關鍵字查詢
         public List<BookContentModel> GetAdminBookList(string keyword)
         {
             string whereCondition = string.Empty;       // 宣告一個變數 存放 要附加上去的SQL指令，指令先清空  
@@ -207,16 +436,16 @@ namespace EBookStore.Managers
             {
                 BookID = (Guid)reader["BookID"],
                 UserID = (Guid)reader["UserID"],
-                //LabelID = (Guid)reader["LabelID"],
 
                 CategoryName = reader["CategoryName"] as string,
                 AuthorName = reader["AuthorName"] as string,
                 BookName = reader["BookName"] as string,
                 Description = reader["Description"] as string,
                 Image = reader["Image"] as string,
+                Price = (decimal)reader["Price"],
                 IsEnable = (bool)reader["IsEnable"],
                 Date = (DateTime)reader["Date"],
-                EndDate = /*(DateTime)*/reader["EndDate"] as DateTime?,
+                EndDate = reader["EndDate"] as DateTime?,
 
                 //CreateDate = (DateTime)reader["CreateDate"],
                 //CreateUser = (Guid)reader["CreateUser"],
@@ -265,7 +494,7 @@ namespace EBookStore.Managers
             }
         }
 
-        // 新增 OR 編輯書籍前 去資料庫找出 相對應BookName 的書籍資訊
+        // 儲存書籍的 新增 OR 編輯前，去資料庫找出 相對應BookName 的書籍資訊
         public BookContentModel CompareBook(string bookname)
         {
             string connStr = ConfigHelper.GetConnectionString();
@@ -301,6 +530,63 @@ namespace EBookStore.Managers
             }
         }
 
+        // 儲存書籍的 新增 OR 編輯前，去資料庫找出 相對應UserID 的資訊 (檢查 UserID 是否存在)
+        public List<MemberAccount> GetUserID(Guid userid)
+        {
+            List<MemberAccount> list = new List<MemberAccount>();
+
+            string connStr = ConfigHelper.GetConnectionString();
+            string commandText =
+                $@" SELECT *
+                    FROM Users 
+                    WHERE UserID = @UserID ";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    using (SqlCommand command = new SqlCommand(commandText, conn))
+                    {
+                        command.Parameters.AddWithValue("@UserID", userid);
+
+                        conn.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+
+                        //MemberAccount model = new MemberAccount();
+                        if (reader.Read())
+                        {
+                            //model = this.BuildBookContentModel(reader);
+                            MemberAccount model = new MemberAccount()
+                            {
+                                UserID = (Guid)reader["UserID"],
+
+                                Account = reader["Account"] as string,
+                                Password = reader["PWD"] as string,
+                                Phone = reader["Phone"] as string,
+                                Email = reader["Email"] as string,
+                                isEnable = (bool)reader["IsEnable"],
+                                UserLevel = (int)reader["UserLevel"],
+
+                                CreateDate = (DateTime)reader["CreateDate"],
+                                UpdateDate = (DateTime)reader["UpdateDate"]
+                                //UpdateUser = reader["UpdateUser"] as Guid?,
+                                //DeleteDate = reader["DeleteDate"] as DateTime?,
+                                //DeleteUser = reader["DeleteUser"] as Guid?
+                            };
+
+                            list.Add(model);
+                        }
+
+                        return list;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog("BookContentManager.GetBook", ex);
+                throw;
+            }
+        }
+
         // 新增書籍(書名不能重複? --> 好像可以)
         public void CreateBookContent(BookContentModel model)
         {
@@ -310,12 +596,11 @@ namespace EBookStore.Managers
 
             // 2. 新增書籍
             string connStr = ConfigHelper.GetConnectionString();
-            // LabelID, @LabelID,
             string commandText =
                @"   INSERT INTO Books
-                        (BookID, UserID, CategoryName, AuthorName, BookName, Description, Date, EndDate, Image, IsEnable)
+                        (BookID, UserID, CategoryName, AuthorName, BookName, Description, Price, Date, EndDate, Image, IsEnable)
                     VALUES
-                        (@BookID, @UserID, @CategoryName, @AuthorName, @BookName, @Description, @Date, @EndDate, @Image, @IsEnable) ";
+                        (@BookID, @UserID, @CategoryName, @AuthorName, @BookName, @Description, @Price, @Date, @EndDate, @Image, @IsEnable) ";
             try
             {
                 using (SqlConnection conn = new SqlConnection(connStr))
@@ -326,12 +611,12 @@ namespace EBookStore.Managers
 
                         command.Parameters.AddWithValue("@BookID", model.BookID);
                         command.Parameters.AddWithValue("@UserID", model.UserID);
-                        //command.Parameters.AddWithValue("@LabelID", model.LabelID);
 
                         command.Parameters.AddWithValue("@CategoryName", model.CategoryName);
                         command.Parameters.AddWithValue("@AuthorName", model.AuthorName);
                         command.Parameters.AddWithValue("@BookName", model.BookName);
                         command.Parameters.AddWithValue("@Description", model.Description);
+                        command.Parameters.AddWithValue("@Price", model.Price);
                         command.Parameters.AddWithValue("@Date", model.Date);
                         command.Parameters.AddWithValue("@EndDate", model.EndDate);
                         command.Parameters.AddWithValue("@Image", model.Image);
@@ -369,6 +654,7 @@ namespace EBookStore.Managers
                         AuthorName = @AuthorName,
                         BookName = @BookName,
                         Description = @Description,
+                        Price = @Price,                       
                         Date = @Date,
                         EndDate = @EndDate,
                         Image = @Image,
@@ -384,12 +670,12 @@ namespace EBookStore.Managers
                     {
                         command.Parameters.AddWithValue("@BookID", model.BookID);
                         command.Parameters.AddWithValue("@UserID", model.UserID);
-                        //command.Parameters.AddWithValue("@LabelID", model.LabelID);
 
                         command.Parameters.AddWithValue("@CategoryName", model.CategoryName);
                         command.Parameters.AddWithValue("@AuthorName", model.AuthorName);
                         command.Parameters.AddWithValue("@BookName", model.BookName);
                         command.Parameters.AddWithValue("@Description", model.Description);
+                        command.Parameters.AddWithValue("@Price", model.Price);
                         command.Parameters.AddWithValue("@Date", model.Date);
                         command.Parameters.AddWithValue("@EndDate", model.EndDate);
                         command.Parameters.AddWithValue("@Image", model.Image);
