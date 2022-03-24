@@ -574,7 +574,7 @@ namespace EBookStore.Managers
             }
             catch (Exception ex)
             {
-                Logger.WriteLog("BookContentManager.GetBook", ex);
+                Logger.WriteLog("BookContentManager.GetUserID", ex);
                 throw;
             }
         }

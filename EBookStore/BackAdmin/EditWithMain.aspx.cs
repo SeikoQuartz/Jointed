@@ -40,6 +40,7 @@ namespace Project.BackAdmin
         {
             this.ltlAccount.Visible = false;
             this.txtAccount.Visible = true;
+            this.txtLevel.Visible = false;
 
             this.ltlID.Text = "尚待新增";
         }
@@ -66,9 +67,13 @@ namespace Project.BackAdmin
             string phone = this.txtPhone.Text.Trim();
             string Email = this.txtEmail.Text.Trim();
             string UserLev = this.txtLevel.Text.Trim();
+            if (string.IsNullOrWhiteSpace(UserLev))
+            {
+                UserLev = "2";
+            }
 
 
-            if (!_isEditMode)
+                if (!_isEditMode)
             {
                 MemberAccount member = new MemberAccount();
                 member.Account = account;

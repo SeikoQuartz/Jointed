@@ -45,7 +45,7 @@ namespace EBookStore
             }
             if (this._mgr.GuestLogin(account, pwd)) //沒寫true or false =為true的省略寫法 
             {
-                Response.Redirect("~/MainPage.aspx");
+                Response.Redirect("~/BookList.aspx");
                 // Response.Redirect(Request.RawUrl);
 
             }

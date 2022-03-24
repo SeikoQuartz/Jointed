@@ -37,7 +37,7 @@
               <tr>
             <th>等級</th>
             <td>
-                <asp:TextBox runat="server" ID="txtLevel"></asp:TextBox>
+                <asp:TextBox runat="server" ID="txtLevel" Visible="true"></asp:TextBox>
             </td>
         </tr>
     </table>
