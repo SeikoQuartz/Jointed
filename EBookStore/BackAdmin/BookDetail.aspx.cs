@@ -192,9 +192,11 @@ namespace EBookStore.BackAdmin
             if (!DateTime.TryParse(this.txtEndDate.Text.Trim(), out endDate)) // 轉型失敗
                 errorMsgList.Add("下架日期的格式錯誤。");
 
-
             if (errorMsgList.Count > 0)
+            {
+                errorMsgList.Add("請回上一頁重新 新增 或 編輯。");
                 return false;
+            }
             else
                 return true;
         }
