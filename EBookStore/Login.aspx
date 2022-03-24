@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="EBookStore.Login" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs"  Inherits="EBookStore.Login" %>
 
 <!DOCTYPE html>
 
@@ -8,7 +8,9 @@
 </head>
 <body>
    <form id="form1" runat="server">
+
         <asp:PlaceHolder ID="plcLogin" runat="server">
+
         Account:<asp:TextBox ID="txtAccount" runat="server"></asp:TextBox>
         Password:<asp:TextBox ID="txtPassword" runat="server" TextMode="Password"></asp:TextBox>
         <asp:Button ID="btnLogin" runat="server" Text="登入"  Onclick="btnLogin_Click"/>

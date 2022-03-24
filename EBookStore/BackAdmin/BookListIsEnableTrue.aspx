@@ -1,13 +1,11 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/BackAdmin/Admin.Master" AutoEventWireup="true" CodeBehind="BookListIsEnableFalse.aspx.cs" Inherits="EBookStore.BackAdmin.BookListIsEnableFalse" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/BackAdmin/Admin.Master" AutoEventWireup="true" CodeBehind="BookListIsEnableTrue.aspx.cs" Inherits="EBookStore.BackAdmin.BookListIsEnableTrue" %>
 
 <%@ Register Src="~/ShareControls/ucPager.ascx" TagPrefix="uc1" TagName="ucPager" %>
 
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
-
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-            
+        
     <asp:Button ID="btnCreate" runat="server" Text="新增" OnClick="btnCreate_Click" />
     <asp:Button ID="btnDelete" runat="server" Text="下架" OnClick="btnDelete_Click" /><br />
 
@@ -59,7 +57,5 @@
     <asp:PlaceHolder runat="server" ID="plcEmpty" Visible="false">
         <p>尚未有資料 </p>
     </asp:PlaceHolder>
-
     <uc1:ucPager runat="server" ID="ucPager" PageSize="10" />
-
 </asp:Content>

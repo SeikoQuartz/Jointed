@@ -11,7 +11,7 @@ namespace EBookStore.BackAdmin
 {
 
 
-    public partial class BookListIsEnableFalse
+    public partial class BookListIsEnableTrue
     {
 
         /// <summary>

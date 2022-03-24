@@ -559,15 +559,7 @@ namespace EBookStore.Managers
                             {
                                 UserID = (Guid)reader["UserID"],
 
-                                Account = reader["Account"] as string,
-                                Password = reader["PWD"] as string,
-                                Phone = reader["Phone"] as string,
-                                Email = reader["Email"] as string,
-                                isEnable = (bool)reader["IsEnable"],
-                                UserLevel = (int)reader["UserLevel"],
-
-                                CreateDate = (DateTime)reader["CreateDate"],
-                                UpdateDate = (DateTime)reader["UpdateDate"]
+                             
                                 //UpdateUser = reader["UpdateUser"] as Guid?,
                                 //DeleteDate = reader["DeleteDate"] as DateTime?,
                                 //DeleteUser = reader["DeleteUser"] as Guid?

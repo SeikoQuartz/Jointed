@@ -9,7 +9,6 @@ namespace EBookStore.Models
     {
         public Guid BookID { get; set; }
         public Guid UserID { get; set; }
-        //public Guid LabelID { get; set; }
         public string CategoryName { get; set; }
         public string AuthorName { get; set; }
         public string BookName { get; set; }

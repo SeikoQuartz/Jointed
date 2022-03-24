@@ -1,13 +1,13 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/BackAdmin/Admin.Master" AutoEventWireup="true" CodeBehind="BookListIsEnableFalse.aspx.cs" Inherits="EBookStore.BackAdmin.BookListIsEnableFalse" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/BackAdmin/Admin.Master" AutoEventWireup="true" CodeBehind="BookListSearchIEFalse.aspx.cs" Inherits="EBookStore.BackAdmin.BookListSearchIEFalse" %>
 
 <%@ Register Src="~/ShareControls/ucPager.ascx" TagPrefix="uc1" TagName="ucPager" %>
 
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
-
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-            
+
+
+                
     <asp:Button ID="btnCreate" runat="server" Text="新增" OnClick="btnCreate_Click" />
     <asp:Button ID="btnDelete" runat="server" Text="下架" OnClick="btnDelete_Click" /><br />
 
@@ -17,10 +17,10 @@
 
     <asp:Literal ID="ltlDisplay" runat="server">顯示: </asp:Literal>
     <asp:Button ID="btnAll" runat="server" Text="全部商品" OnClick="btnAll_Click" />
-    <asp:Button ID="btnIsEnableTrue" runat="server" Text="已上架商品" OnClick="btnIsEnableTrue_Click" />
-    <asp:Button ID="btnIsEnableFalse" runat="server" Text="已下架商品" OnClick="btnIsEnableFalse_Click" />
-<%--    <asp:Button ID="btnSearchIETrue" runat="server" Text="已上架商品" OnClick="btnSearchIETrue_Click" />
-    <asp:Button ID="btnSearchIEFalse" runat="server" Text="已下架商品" OnClick="btnSearchIEFalse_Click" />--%>
+<%--    <asp:Button ID="btnIsEnableTrue" runat="server" Text="已上架商品" OnClick="btnIsEnableTrue_Click" />
+    <asp:Button ID="btnIsEnableFalse" runat="server" Text="已下架商品" OnClick="btnIsEnableFalse_Click" />--%>
+    <asp:Button ID="btnSearchIETrue" runat="server" Text="已上架商品" OnClick="btnSearchIETrue_Click" />
+    <asp:Button ID="btnSearchIEFalse" runat="server" Text="已下架商品" OnClick="btnSearchIEFalse_Click" />
 
     <asp:GridView ID="gvList" runat="server" AutoGenerateColumns="False">
         <Columns>
@@ -58,8 +58,7 @@
 
     <asp:PlaceHolder runat="server" ID="plcEmpty" Visible="false">
         <p>尚未有資料 </p>
+
     </asp:PlaceHolder>
-
     <uc1:ucPager runat="server" ID="ucPager" PageSize="10" />
-
 </asp:Content>
