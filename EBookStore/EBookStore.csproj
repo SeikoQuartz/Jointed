@@ -113,7 +113,10 @@
     <Content Include="Css\Components\Navbar.css" />
     <Content Include="Css\Global.css" />
     <Content Include="Global.asax" />
+    <Content Include="Images\backRetry.jpg" />
+    <Content Include="Images\bookback.jpg" />
     <Content Include="Images\logo.jpg" />
+    <Content Include="Images\TryBook.jpg" />
     <Content Include="JavaScript\OrderDetail.js" />
     <Content Include="JavaScript\BookList.js" />
     <Content Include="Login.aspx" />

@@ -35,6 +35,10 @@
             <li class="navbar__navitem">
                 <a href="pages/partners.html">合作夥伴</a>
             </li>
+             <asp:Button ID="btn_Login" runat="server" Text="登入" OnClick="btn_Login_Click"  class="btn btn-success position-relative"  />
+            <asp:Button ID="btn_Logout" runat="server" Text="登出" OnClick="btn_Logout_Click" class="btn btn-danger position-relative" />
+          
+            
             <li class="navbar__navitem">
                 <button id="btnShoppingCart" type="button" class="btn btn-primary position-relative">
                     購物車
