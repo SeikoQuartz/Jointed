@@ -112,6 +112,7 @@
     <Content Include="Css\Components\Footer.css" />
     <Content Include="Css\Components\Navbar.css" />
     <Content Include="Css\Global.css" />
+    <Content Include="Css\mystyle.css" />
     <Content Include="Global.asax" />
     <Content Include="Images\backRetry.jpg" />
     <Content Include="Images\bookback.jpg" />

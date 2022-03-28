@@ -13,11 +13,16 @@ namespace EBookStore.BackAdmin
     {
         private BookContentManager _mgr = new BookContentManager();
         private const int _pageSize = 10;
+        private AccountManager _Amgr = new AccountManager();
 
         // 從資料庫叫出全部的清單資料 OR 輸入書名搜尋關鍵字查詢
         // 將 搜尋關鍵字值 變成 QueryString，再次載入 BookList 頁面，顯示查詢結果
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!this._Amgr.IsLogined())
+            {
+                Response.Redirect("~/Login.aspx");
+            }
             string pageIndexText = this.Request.QueryString["Index"];
             int pageIndex =
                 (string.IsNullOrWhiteSpace(pageIndexText))
